@@ -1,39 +1,39 @@
 #include<stdio.h>
 #include<math.h>
-void armstrongrange(int,int);
+
+int isArm(int n){
+    int ori=n, noofdigits=0, sum=0, armcheck=n;
+    while(ori>0){
+        noofdigits++;
+        ori=ori/10;
+    }
+    
+    while(n>0){
+        sum = sum + pow(n%10,noofdigits);
+        n=n/10;
+    }
+
+    if(armcheck==sum){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
 int main()
 {
 
-int r1, r2;
-scanf("%d %d", &r1, &r2);
-armstrongrange(r1, r2);
+int lower_limit, upper_limit, noofarm=0;
+scanf("%d%d", &lower_limit, &upper_limit);
 
-return 0;
-}
-void armstrongrange(int r1 ,int r2){
-    int nooffigits=0;
-    int original, originalcopy, rem, sum=0, totalarm=0;
-    for(int i=r1; i<=r2; i++){
-        original=i;
-        originalcopy=i;
-        nooffigits=0;
-        sum=0;
-        while(original>0){
-            original=original/10;
-            nooffigits++;
-        }
-        while(originalcopy>0){
-            rem=originalcopy%10;
-            sum = pow(rem,nooffigits) + sum;
-            originalcopy=originalcopy/10;
-            }
-        
-
-        if(sum==i){
-            printf("%d ",i);
-            totalarm++;
-        }
-
+for(int i=lower_limit; i<=upper_limit; i++){
+    if(isArm(i)==1){
+        noofarm++;
+        printf("%d ", i);
     }
-  printf("\n%d", totalarm);
+}
+
+printf("\n%d", noofarm);
+    
+return 0;
 }
